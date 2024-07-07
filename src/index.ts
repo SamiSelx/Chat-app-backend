@@ -9,7 +9,9 @@ import {app,httpServer} from './socket/socket'
 import path from 'path'
 const port = process.env.PORT
 
-app.use(cors())
+app.use(cors({
+    origin:process.env.FRONT_URL
+}))
 app.use('/uploads',express.static(path.join(__dirname,'/uploads')))
 // Perse Form
 app.use(express.urlencoded({extended:true}))
