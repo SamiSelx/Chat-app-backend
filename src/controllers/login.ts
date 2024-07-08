@@ -18,7 +18,14 @@ const login = async (req:Request,res:Response)=>{
             return
         }
         const token = jwt.sign({_id:user._id},process.env.SECRET_KEY!)
-        res.status(200).json({status:'success',message:'login successfully',token})
+        const userLogin = {
+            id:user._id.toString(),
+            username:user.username,
+            email:user.email,
+            room:user.room,
+            token
+        }
+        res.status(200).json({status:'success',message:'login successfully',data:userLogin})
    
     } catch (error) {
         console.log(error);

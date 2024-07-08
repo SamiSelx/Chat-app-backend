@@ -32,7 +32,14 @@ const register = async (req:Request,res:Response)=>{
         const passwordHash = await bcrypt.hash(password,salt)
         const userCreated = await UserModel.create({username,email,password:passwordHash})
         const token = jwt.sign({_id:userCreated._id},process.env.SECRET_KEY!)
-        res.status(201).json({status:'success',message:'User Created Successfully',token})
+        const userRegistred = {
+            id:userCreated._id.toString(),
+            username:userCreated.username,
+            email:userCreated.email,
+            room:userCreated.room,
+            token
+        }
+        res.status(201).json({status:'success',message:'User Created Successfully',data:userRegistred})
 
     } catch (error) {
         console.log(error);
@@ -40,5 +47,6 @@ const register = async (req:Request,res:Response)=>{
     }
 
 }
+
 
 export default register
