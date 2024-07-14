@@ -18,7 +18,13 @@ const UserSchema = new Schema({
     room:[{
         type:String,
         ref:"Room"
-    }]
+    }],
+    loginAttempts:{
+        type:Number,
+        default:0
+    },
+    loginUntil:Number,
+    tempSecret:String
 })
 
 const UserModel = model<UserI>('User',UserSchema)

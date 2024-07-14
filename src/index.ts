@@ -11,6 +11,13 @@ import roomRouter from './routes/roomRoute'
 import {app,httpServer} from './socket/socket'
 import path from 'path'
 const port = process.env.PORT
+import { graphqlHTTP } from 'express-graphql'
+import schema from './Schemas/index'
+
+app.use('/graphql',graphqlHTTP({
+    schema,
+    graphiql:true
+}))
 
 app.use(cors())
 
